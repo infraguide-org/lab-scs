@@ -1,0 +1,6 @@
+---
+##########################
+# netdata
+
+# The netdata server: the first manager node (inventory/group_vars/manager.yml).
+netdata_api_host: "{{ hostvars[groups['manager'][0]]['internal_address'] }}"

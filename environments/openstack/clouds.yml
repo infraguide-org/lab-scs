@@ -1,0 +1,28 @@
+---
+clouds:
+  admin:
+    auth:
+      username: admin
+      project_name: admin
+      auth_url: https://int.os.lab.nfgd.net:5000/v3
+      project_domain_name: default
+      user_domain_name: default
+    endpoint_type: internalURL
+    cacert: /etc/ssl/certs/ca-certificates.crt
+  admin-system:
+    auth:
+      username: admin
+      auth_url: https://int.os.lab.nfgd.net:5000/v3
+      user_domain_name: default
+      system_scope: all
+    endpoint_type: internalURL
+    cacert: /etc/ssl/certs/ca-certificates.crt
+  octavia:
+    auth:
+      username: octavia
+      project_name: service
+      auth_url: https://int.os.lab.nfgd.net:5000/v3
+      project_domain_name: default
+      user_domain_name: default
+    endpoint_type: internalURL
+    cacert: /etc/ssl/certs/ca-certificates.crt

@@ -1,0 +1,43 @@
+---
+##########################
+# docker
+
+docker_version: '5:27.5.1'
+docker_user: "{{ operator_user }}"
+
+##########################
+# operator
+
+operator_user: dragon
+
+# yamllint disable rule:line-length
+operator_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDbNKhSQbQFYr1UsJukTETTlJUwFp8s0t/25SRUnOxpVWlVL+B8G5g3H3tXNGHjqdSjicRpBorGA9VI2JM6o9P+syXn000DUjB4wQQLRuw23geRgp5tmuknPMgysDPbal4wY92p3LEsBGn4I1abSBZ9cqXM38pdqS05mVNlc+fU28WoX/TvF3MEJ4aux3zeC7l+k2osW7Z9WKEilE4726nT2dZRPfsnPFg1KuNB3VAFtXdpbt5C41ZF50vZzULbUAwSl7/aevx0BoCysAqI9DDFjO9SovC5NguvlBfuyU1Bp1+UTqvgFrpwUO/uj5Xgj4vAAaMTbO+M4HOZ9PGb3FFXvXTzUt1N6g6GpXeR9nlKt7Jr6x9NSv1rxHJdql56Ei3ZLfoAMcWDTnMXzbQZKwyEC0sht1mcAi+FVonLweflRR2tVXD12cd6MHpF5r3jLi6N7xDJqf6p1a7ouuQRPvAljrpX46+GfnVBI5iDdmo2dp9uad9UAolp5xxtc6JIqxhzou6AdDlX5VKGhc4K0PRi8WxL+qhmpSWdy0uR+VmbPJBZRf1rn3fmUwjLm/ldkZKJ7D0VxQ4BByNjYKfCLCYqTvueLMGg8se8BcTG38lukN52ps4Sb4Yj2d/svRT2uirjURI4O/5J4xKBNgYQk2+TfghWnPuDmQLLN4OEOYAWgQ==
+# yamllint enable rule:line-length
+
+operator_authorized_keys:
+  - "{{ operator_public_key }}"
+
+##########################
+# resolvconf
+
+# DOCS: https://osism.tech/docs/guides/configuration-guide/commons/resolvconf
+resolvconf_nameserver:
+  - 9.9.9.9
+  - 149.112.112.112
+resolvconf_search: lab.nfgd.net
+
+##########################
+# hosts
+
+hosts_additional_entries:
+  int.os.lab.nfgd.net: 10.20.8.35
+  services.lab.nfgd.net: 10.34.10.35
+
+##########################
+# chrony
+
+# DOCS: https://osism.tech/docs/guides/configuration-guide/services/chrony
+chrony_servers:
+  - 0.de.pool.ntp.org
+  - 1.de.pool.ntp.org
+ceph_cluster_fsid: fce1d811-445c-42ba-aa04-39e45c584bfe
