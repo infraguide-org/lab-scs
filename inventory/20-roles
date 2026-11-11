@@ -7,34 +7,45 @@
 
 # The "all" group is not used in OSISM. Therefore it is important
 # that all nodes are explicitly listed here.
-[generic]
-node01
+[generic:children]
+manager
+monitoring
+control
+compute
+network
 
 # Nodes that act as manager node (sometimes called deployment node)
 # are included in this group.
 [manager]
-node01
+manager.mgmt.lab.nfgd.net
 
 # Nodes which are intended for monitoring services belong to
 # this group
 [monitoring]
-node01
+monitor01.mgmt.lab.nfgd.net
 
 # Nodes that serve as controllers, so things like scheduler,
 # API or database run there, of the environment.
 [control]
-node01
+controller01.mgmt.lab.nfgd.net
+controller02.mgmt.lab.nfgd.net
+controller03.mgmt.lab.nfgd.net
 
 # Virtual systems managed by OpenStack Nova are placed on
 # nodes in this group.
 [compute]
-node01
+compute01.mgmt.lab.nfgd.net
+compute02.mgmt.lab.nfgd.net
+compute11.mgmt.lab.nfgd.net
+compute12.mgmt.lab.nfgd.net
 
 # Network resources managed by OpenStack Neutron, Octavia and Designate,
 # such as routers, are placed on these nodes. This group has nothing
 # to do with the general network configuration.
 [network]
-node01
+network01.mgmt.lab.nfgd.net
+network02.mgmt.lab.nfgd.net
+network03.mgmt.lab.nfgd.net
 
 # Do not define a [storage] group here, not even for the Ceph nodes. It is
 # kolla's group for cinder-volume, cinder-backup, gnocchi and tgtd, and generics
@@ -45,12 +56,10 @@ node01
 # Nodes that serve as controllers for Ceph, so things like the
 # Ceph monitor service run here.
 [ceph-control]
-node01
 
 # The storage available in these systems is provided in the
 # form of OSDs for Ceph.
 [ceph-resource]
-node01
 
 [ceph-rgw:children]
 ceph-control

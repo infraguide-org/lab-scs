@@ -40,4 +40,4 @@ hosts_additional_entries:
 chrony_servers:
   - 0.de.pool.ntp.org
   - 1.de.pool.ntp.org
-ceph_cluster_fsid: fce1d811-445c-42ba-aa04-39e45c584bfe
+ceph_cluster_fsid: 1959570b-e2e3-4017-a5dc-c7606c5068fd
