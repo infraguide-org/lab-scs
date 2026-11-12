@@ -48,7 +48,8 @@ neutron_ovn_availability_zones: [nova]
 neutron_dns_domain: lab.nfgd.net.
 
 # octavia
-octavia_network_type: tenant
+# TODO
+# octavia_network_type: tenant
 
 # designate
 designate_ns_record: openstack.lab.nfgd.net
@@ -62,3 +63,30 @@ designate_ns_record: openstack.lab.nfgd.net
 # A host that runs both the central and the compute agent needs one of them
 # on another port; set it in that host's host_vars:
 # ceilometer_central_prometheus_exporter_port: "9182"
+
+# TODO: magnum needs access to internet
+##########################################################
+# proxy
+
+# container_http_proxy: "http://{{ groups['manager'][0] }}:3128"
+# container_https_proxy: "http://{{ groups['manager'][0] }}:3128"
+# 
+# # Due to the fact, that openstacks relies on python, we cannot trust that global CIDR
+# # excludes are working in general but it they don't harm
+# container_no_proxy: "localhost,127.0.0.1,landscape.example.com,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+
+# k3s
+# proxy_env:
+#   HTTP_PROXY: "http://{{ groups['manager'][0] }}:3128"
+#   HTTPS_PROXY: "http://{{ groups['manager'][0] }}:3128"
+#   # Due to the fact, that k8s is based on Golang supports CIDR blocks its a good idea to exclude local networks,
+#   # there might be really rare cases where CIDR excludes are ignored when calling non-golang binaries.
+#   NO_PROXY: "localhost,127.0.0.1,landscape.example.com,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
+
+# TODO
+##########################################################
+# letsencrypt
+# enable_letsencrypt: "yes"
+# letsencrypt_email: "<The email used for registration and recovery contact>"
+# kolla_enable_tls_external: "yes"
+# kolla_enable_tls_internal: "yes"

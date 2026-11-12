@@ -45,3 +45,7 @@ configuration_git_protocol: ssh
 configuration_git_repository: infraguide-org/lab-scs
 configuration_git_username: git
 configuration_git_version: main
+
+# TODO
+# network_managed_externally: true
+# frr_managed_externally: false

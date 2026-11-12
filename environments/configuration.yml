@@ -41,3 +41,24 @@ chrony_servers:
   - 0.de.pool.ntp.org
   - 1.de.pool.ntp.org
 ceph_cluster_fsid: 1959570b-e2e3-4017-a5dc-c7606c5068fd
+
+##########################
+# TODO:
+
+required_packages_default:
+  - curl
+  - dmidecode
+  - ethtool
+  - iotop
+  - jq
+  - lsscsi
+  - ltrace
+  - mtr
+  - nvme-cli
+  - pciutils
+  - rsyslog
+  - socat
+  - sysstat
+  - tmux
+  - tree
+  - whois
