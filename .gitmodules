@@ -1,0 +1,5 @@
+# Source: https://github.com/infraguide-org/lab-scs
+# Copyright (c) 2026 infraguide.org, MIT License
+[submodule "deploy"]
+	path = deploy
+	url = ../lab-scs-config.git
