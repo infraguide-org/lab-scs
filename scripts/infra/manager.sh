@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Source: https://github.com/infraguide-org/setup-sandbox
+# Source: https://github.com/infraguide-org/lab-scs
 # Copyright (c) 2026 infraguide.org, MIT License
 
 set -e

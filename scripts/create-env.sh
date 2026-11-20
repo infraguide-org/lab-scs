@@ -57,7 +57,7 @@ fi
 
 # vars
 LAB_INFRA_NODES_GR1="dns|proxy|registry"
-LAB_INFRA_NODES_GR2="deployment|recorder"
+LAB_INFRA_NODES_GR2="manager|recorder"
 
 ##############################################################################
 # Infra nodes group1
