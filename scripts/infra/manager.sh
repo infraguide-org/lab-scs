@@ -24,6 +24,11 @@ apt-get install -y \
 
 SYS_USER_NAME=deploy
 
+# -f: no error when the group already exists (second run)
+groupadd -f dragon
+# -a: add the groups, keep the existing ones (e.g. sudo)
+usermod -aG docker,dragon $SYS_USER_NAME
+
 sudo -i -u $SYS_USER_NAME bash << "AS_SYS_USER"
 LAB_NAME=lab-scs
 
@@ -36,8 +41,19 @@ mkdir -p $LAB_NAME && \
 curl -sSL https://github.com/infraguide-org/$LAB_NAME/archive/HEAD.tar.gz | \
 tar -xz -C $LAB_NAME --strip-components=1
 
-ln -s ~/$LAB_NAME/deploy/kolla-ansible openstack
-ln -s ~/$LAB_NAME/deploy/cephadm       ceph
+# deploy/openstack is the submodule $LAB_NAME-config, the tarball above
+# leaves it empty
+curl -sSL https://github.com/infraguide-org/$LAB_NAME-config/archive/HEAD.tar.gz | \
+tar -xz -C ~/$LAB_NAME/deploy/openstack --strip-components=1
+
+python3 -m venv $HOME/venv/openstack
+source $HOME/venv/openstack/bin/activate
+pip3 install -U pip
+pip3 install -r ~/$LAB_NAME/deploy/openstack-cli/requirements.txt
+
+# clouds.yaml for OS_CLOUD, -f: replace the link on a second run
+mkdir -p ~/.config/openstack
+ln -sf /opt/configuration/environments/openstack/clouds.yml ~/.config/openstack/clouds.yaml
 
 cat >> ~/.profile <<"EOF"
 ##############################################################################
@@ -45,20 +61,13 @@ cat >> ~/.profile <<"EOF"
 
 export OPENSTACK_DIR=~/openstack
 
-if [ -z "$VIRTUAL_ENV" -a -L ~/venv/openstack ]
+if [ -z "$VIRTUAL_ENV" -a -f ~/venv/openstack/bin/activate ]
 then
   source ~/venv/openstack/bin/activate
 fi
-export ARA_HOME=$VIRTUAL_ENV/lib/python3.12/site-packages/ara
 
+export OS_CLOUD=admin
 
-ADMIN_OPENRC_FILE=$OPENSTACK_DIR/custom-config/lab/admin-openrc.sh
-if [ -f $ADMIN_OPENRC_FILE ]
-then
-  source  $ADMIN_OPENRC_FILE
-fi
-
-export PATH=~/openstack/bin/:$PATH
 export PS1="[\u@\h \W|\[\e[1;32m\]\$OS_USERNAME.\$OS_PROJECT_NAME\[\e[m\]]\$"
 source <(openstack complete)
 
